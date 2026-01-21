@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand Colors */
+  --primary: #0B1C3E;    /* Deep Blue from Logo Background */
+  --secondary: #D4AF37;  /* Gold/Yellow from Turtle */
+  --accent: #00B5D8;     /* Cyan/Teal from TECH text */
+  
+  /* Backgrounds */
+  --background: #FFFFFF;
+  --background-alt: #F8FAFC; /* Slate 50 for sections */
+  
+  /* Text */
+  --foreground: #1A202C; /* Dark Slate for main text */
+  --foreground-muted: #4A5568; /* Gray for secondary text */
+  
+  /* UI Elements */
+  --border: #E2E8F0;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-outfit);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+  overflow-x: hidden;
+}
