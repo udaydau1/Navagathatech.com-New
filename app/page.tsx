@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, Database, Layers, MonitorSmartphone, Server, ShieldCheck, Zap, Globe, Cpu, Cloud, Code2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { CheckCircle2, Database, Layers, MonitorSmartphone, Server, ShieldCheck, Zap, Globe, Cpu, Cloud, Code2, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/Header";
@@ -25,13 +25,23 @@ const staggerContainer = {
   }
 };
 
-const ServiceCard = ({ icon: Icon, title, desc, color, points }: any) => {
-  const colorMap: any = {
-    primary: "border-primary text-primary bg-primary/5",
-    secondary: "border-secondary text-secondary bg-secondary/5",
-    accent: "border-accent text-accent bg-accent/5",
-  };
+type ServiceCardColor = "primary" | "secondary" | "accent";
 
+type ServiceCardProps = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  color: ServiceCardColor;
+  points: string[];
+};
+
+const colorMap: Record<ServiceCardColor, string> = {
+  primary: "border-primary text-primary bg-primary/5",
+  secondary: "border-secondary text-secondary bg-secondary/5",
+  accent: "border-accent text-accent bg-accent/5",
+};
+
+const ServiceCard = ({ icon: Icon, title, desc, color, points }: ServiceCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -10, scale: 1.02 }}
@@ -148,7 +158,7 @@ export default function Home() {
           <motion.div {...fadeIn}>
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Vision</h2>
             <p className="text-xl md:text-2xl leading-relaxed font-light text-gray-200">
-              "To become the most trusted partner for businesses seeking innovation, reliability, and transformation by delivering solutions that not only solve today’s challenges but prepare organizations for tomorrow’s opportunities."
+              &quot;To become the most trusted partner for businesses seeking innovation, reliability, and transformation by delivering solutions that not only solve today&rsquo;s challenges but prepare organizations for tomorrow&rsquo;s opportunities.&quot;
             </p>
             <div className="mt-8 w-24 h-1 bg-gradient-to-r from-secondary to-accent mx-auto rounded-full" />
           </motion.div>
@@ -357,7 +367,7 @@ export default function Home() {
                   Our holistic approach ensures that every solution is aligned with your business goals, enabling cost efficiency and operational agility.
                 </p>
                 <p className="text-lg font-medium text-secondary">
-                  "We don't just implement technology — we transform your IT ecosystem into a strategic asset."
+                  &quot;We don&apos;t just implement technology — we transform your IT ecosystem into a strategic asset.&quot;
                 </p>
               </div>
             </div>

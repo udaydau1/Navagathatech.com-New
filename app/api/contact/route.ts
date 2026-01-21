@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { name, email, company, subject, message } = body;
 
         // LOGIC FOR EMAILING:
         // In a real production environment, you would use a service like Resend, SendGrid, or Nodemailer here.
