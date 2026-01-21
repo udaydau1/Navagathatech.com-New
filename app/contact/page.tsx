@@ -2,19 +2,36 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, Briefcase, TrendingUp, Mic2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, Briefcase, TrendingUp, Mic2, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-const inquiryTypes = [
+type InquiryTypeId = "services" | "investor" | "media";
+
+type InquiryType = {
+    id: InquiryTypeId;
+    label: string;
+    icon: LucideIcon;
+};
+
+type ContactFormData = {
+    name: string;
+    email: string;
+    company: string;
+    subject: string;
+    message: string;
+    country: string;
+};
+
+const inquiryTypes: InquiryType[] = [
     { id: 'services', label: 'Request for Services', icon: Briefcase },
     { id: 'investor', label: 'Investor Information', icon: TrendingUp },
     { id: 'media', label: 'Media Contacts', icon: Mic2 },
 ];
 
 export default function ContactPage() {
-    const [selectedType, setSelectedType] = useState('services');
-    const [formData, setFormData] = useState({
+    const [selectedType, setSelectedType] = useState<InquiryTypeId>("services");
+    const [formData, setFormData] = useState<ContactFormData>({
         name: "",
         email: "",
         company: "",
@@ -24,7 +41,7 @@ export default function ContactPage() {
     });
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-    const handleTypeChange = (type: string, label: string) => {
+    const handleTypeChange = (type: InquiryTypeId, label: string) => {
         setSelectedType(type);
         setFormData({ ...formData, subject: label });
     };
@@ -68,11 +85,11 @@ export default function ContactPage() {
                                 className="max-w-2xl"
                             >
                                 <h1 className="text-5xl md:text-7xl font-light text-primary mb-6 leading-tight">
-                                    What's on <br />
+                                    What&apos;s on <br />
                                     <span className="font-bold">your mind?</span>
                                 </h1>
                                 <p className="text-xl text-gray-600 leading-relaxed">
-                                    We're here to help! Tell us what you're looking for and we'll get you connected to the right people.
+                                    We&apos;re here to help! Tell us what you&apos;re looking for and we&apos;ll get you connected to the right people.
                                 </p>
                             </motion.div>
 
@@ -188,7 +205,7 @@ export default function ContactPage() {
                                         </div>
                                         <h2 className="text-4xl font-bold text-primary mb-4">Submission Successful</h2>
                                         <p className="text-xl text-gray-500 mb-10 max-w-md">
-                                            Your request regarding <strong>{formData.subject}</strong> has been logged. We'll be in touch with you shortly.
+                                            Your request regarding <strong>{formData.subject}</strong> has been logged. We&apos;ll be in touch with you shortly.
                                         </p>
                                         <button
                                             onClick={() => setStatus("idle")}
@@ -268,7 +285,7 @@ export default function ContactPage() {
                                                 <label className="text-sm font-bold text-gray-400 uppercase tracking-widest">Inquiry Message *</label>
                                                 <textarea
                                                     required rows={4}
-                                                    placeholder="Briefly describe what you're looking for..."
+                                                    placeholder="Briefly describe what you&apos;re looking for..."
                                                     value={formData.message}
                                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                                     className="w-full p-6 bg-gray-50 border-2 border-gray-50 rounded-[24px] focus:bg-white focus:border-primary/20 transition-all outline-none text-lg resize-none"
