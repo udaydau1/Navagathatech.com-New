@@ -8,9 +8,10 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "#about" },
-    { name: "Capabilities", href: "#capabilities" },
-    { name: "Expertise", href: "#expertise" },
+    { name: "About Us", href: "/#about" }, // Linked as ID since it's on Home
+    { name: "Capabilities", href: "/#capabilities" },
+    { name: "Expertise", href: "/#expertise" },
+    { name: "Careers", href: "/careers" },
 ];
 
 export function Header() {
