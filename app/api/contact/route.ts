@@ -1,31 +1,39 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
+        const { name, email, company, subject, message } = body;
 
-        // LOGIC FOR EMAILING:
-        // In a real production environment, you would use a service like Resend, SendGrid, or Nodemailer here.
-        // Example with a hypothetical mail service:
-        /*
-        await sendEmail({
-            to: "info@navagathatech.com",
-            from: "website@navagathatech.com",
-            subject: `New Query: ${subject} from ${name}`,
-            text: `
-                Name: ${name}
-                Email: ${email}
-                Company: ${company || "N/A"}
-                Subject: ${subject}
-                Message: ${message}
-            `
+        // Send email using Resend
+        const { data, error } = await resend.emails.send({
+            from: "Navagatha Contact Form <onboarding@resend.dev>",
+            to: ["info@navagathatech.com"],
+            subject: `New Contact Form: ${subject}`,
+            html: `
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Company:</strong> ${company || "N/A"}</p>
+                <p><strong>Subject:</strong> ${subject}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `,
         });
-        */
 
-        console.log("New Contact Form Submission:", body);
+        if (error) {
+            console.error("Resend Error:", error);
+            return NextResponse.json({
+                success: false,
+                message: "Failed to send message. Please try again later."
+            }, { status: 500 });
+        }
 
-        // For now, we return a success response to the frontend.
-        // To enable REAL emails, you just need to plug in your SMTP or Mail service API key.
+        console.log("Email sent successfully:", data);
+
         return NextResponse.json({
             success: true,
             message: "Your message has been received and sent to our team."
