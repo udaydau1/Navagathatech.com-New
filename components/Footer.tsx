@@ -50,7 +50,7 @@ export function Footer() {
                                 </p>
                             </li>
                             <li><Link href="/contact" className="hover:text-white transition-colors font-medium">Contact Us Form</Link></li>
-                            <li><a href="tel:+918770271611" className="hover:text-white transition-colors font-medium">+91-8770271611</a></li>
+                            <li><a href="tel:+912245705334" className="hover:text-white transition-colors font-medium">+91 22 45705334</a></li>
                             <li><a href="mailto:info@navagathatech.com" className="hover:text-white transition-colors font-medium">info@navagathatech.com</a></li>
                         </ul>
                     </div>

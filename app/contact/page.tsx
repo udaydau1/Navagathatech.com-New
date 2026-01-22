@@ -178,7 +178,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-400 font-bold uppercase tracking-wider">Business Support</p>
-                                        <p className="text-xl font-bold text-primary">+91-8770271611</p>
+                                        <p className="text-xl font-bold text-primary">+91 22 45705334</p>
                                     </div>
                                 </div>
                             </div>
