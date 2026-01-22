@@ -42,7 +42,7 @@ export async function POST(req: Request) {
             console.error("Resend Error:", error);
             return NextResponse.json({
                 success: false,
-                message: "Failed to send message. Please try again later."
+                message: `Email service error: ${error.message || "Unknown error"}`
             }, { status: 500 });
         }
 
