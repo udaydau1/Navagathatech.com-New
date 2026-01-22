@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // Import Image
-import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/#about" }, // Linked as ID since it's on Home
+    { name: "About Us", href: "/#about" },
     { name: "Capabilities", href: "/#capabilities" },
     { name: "Expertise", href: "/#expertise" },
     { name: "Careers", href: "/careers" },
@@ -23,8 +24,19 @@ export function Header() {
             setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+
+        // Lock scroll when mobile menu is open
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            document.body.style.overflow = 'unset';
+        };
+    }, [mobileMenuOpen]);
 
     return (
         <header
@@ -34,8 +46,8 @@ export function Header() {
             )}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="relative h-14 w-[380px]">
+                <Link href="/" className="flex items-center gap-2 group relative z-[60]">
+                    <div className="relative h-10 md:h-14 w-[180px] md:w-[380px] transition-all">
                         <Image
                             src="/images/logo_navagatha.png"
                             alt="Navagatha Tech"
@@ -67,35 +79,66 @@ export function Header() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden p-2 text-foreground"
+                    className="md:hidden p-2 text-primary relative z-[60] hover:bg-primary/5 rounded-lg transition-colors"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle Menu"
                 >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
-            {/* Mobile Menu */}
-            {mobileMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 p-6">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-lg font-medium text-foreground hover:text-primary"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                    <Link
-                        href="/contact"
-                        className="w-full text-center px-5 py-3 bg-primary text-white text-base font-semibold rounded-md"
-                        onClick={() => setMobileMenuOpen(false)}
+            {/* Premium Mobile Menu Drawer */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: "100%" }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: "100%" }}
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        className="fixed inset-0 z-50 bg-white md:hidden pt-24 pb-10 px-6 flex flex-col h-screen"
                     >
-                        Contact Us
-                    </Link>
-                </div>
-            )}
+                        <div className="flex flex-col gap-2 mt-8">
+                            {navigation.map((item, idx) => (
+                                <motion.div
+                                    key={item.name}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 + idx * 0.05 }}
+                                >
+                                    <Link
+                                        href={item.href}
+                                        className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        {item.name}
+                                        <ArrowRight size={24} className="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="mt-auto"
+                        >
+                            <Link
+                                href="/contact"
+                                className="w-full text-center px-8 py-5 bg-primary text-white text-xl font-bold rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-primary/20"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Contact Us <ArrowRight size={20} />
+                            </Link>
+
+                            <div className="mt-8 text-center text-gray-400 text-sm">
+                                <p>© 2026 Navagatha Tech Pvt. Ltd.</p>
+                                <p>Andheri (W), Mumbai</p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 }
