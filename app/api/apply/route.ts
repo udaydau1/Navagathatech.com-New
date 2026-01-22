@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         const buffer = Buffer.from(arrayBuffer);
 
         // Send email to HR
-        const { data, error } = await resend.emails.send({
+        const { error: hrError } = await resend.emails.send({
             from: "Navagatha Careers <contact@navagathatech.com>",
             to: ["info@navagathatech.com"],
             subject: `New Job Application: ${jobTitle} - ${name}`,
@@ -54,12 +54,43 @@ export async function POST(req: Request) {
             ],
         });
 
-        if (error) {
-            console.error("Resend Error:", error);
-            return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+        if (hrError) {
+            console.error("HR Email Error:", hrError);
+            return NextResponse.json({ success: false, message: "Failed to notify HR" }, { status: 500 });
         }
 
-        return NextResponse.json({ success: true, data });
+        // Send confirmation email to Applicant
+        const { error: applicantError } = await resend.emails.send({
+            from: "Navagatha Tech <contact@navagathatech.com>",
+            to: [email],
+            subject: `Application Received: ${jobTitle} at Navagatha Tech`,
+            html: `
+        <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0F172A;">Hello ${name},</h2>
+          <p>Thank you for your interest in the <strong>${jobTitle}</strong> position at Navagatha Tech Pvt. Ltd.</p>
+          <p>We've successfully received your application and your CV. Our recruitment team is currently reviewing your profile to see if there's a good match.</p>
+          <div style="background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; margin: 25px 0;">
+            <p style="margin: 0; font-size: 14px; color: #64748B;">Applied for:</p>
+            <p style="margin: 5px 0 0; font-weight: bold; font-size: 18px; color: #0F172A;">${jobTitle}</p>
+          </div>
+          <p>If your experience aligns with our requirements, we will reach out to you for the next steps in our hiring process.</p>
+          <p>We appreciate the time you took to apply and wish you the best of luck!</p>
+          <br />
+          <p>Best Regards,</p>
+          <p><strong>Team Navagatha</strong><br />Navagatha Tech Pvt. Ltd.</p>
+          <hr style="border: none; border-top: 1px solid #EEE; margin: 30px 0;" />
+          <p style="font-size: 11px; color: #999; text-align: center;">
+            Andheri (W), Mumbai, India | <a href="https://www.navagathatech.com">navagathatech.com</a>
+          </p>
+        </div>
+      `,
+        });
+
+        if (applicantError) {
+            console.error("Applicant Email Error:", applicantError);
+        }
+
+        return NextResponse.json({ success: true });
     } catch (error) {
         console.error("API Error:", error);
         return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
