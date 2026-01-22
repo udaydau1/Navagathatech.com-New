@@ -39,6 +39,7 @@ export default function ContactPage() {
         message: "",
         country: "India"
     });
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
     const handleTypeChange = (type: InquiryTypeId, label: string) => {
@@ -49,6 +50,7 @@ export default function ContactPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("submitting");
+        setErrorMessage("");
 
         try {
             const response = await fetch("/api/contact", {
@@ -57,15 +59,19 @@ export default function ContactPage() {
                 body: JSON.stringify({ ...formData, inquiryType: selectedType })
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (response.ok && result.success) {
                 setStatus("success");
                 // Reset form but keep name/email if they want to send another (optional)
                 setFormData({ name: "", email: "", company: "", subject: formData.subject, message: "", country: "India" });
             } else {
+                setErrorMessage(result.message || "An unexpected error occurred.");
                 setStatus("error");
             }
         } catch (error) {
             console.error("Submission Error:", error);
+            setErrorMessage("Failed to connect to the server. Please check your internet and try again.");
             setStatus("error");
         }
     };
@@ -230,7 +236,7 @@ export default function ContactPage() {
                                         {status === "error" && (
                                             <div className="mb-8 p-5 bg-red-50 text-red-600 rounded-2xl text-sm font-bold border border-red-100 flex gap-3 items-center">
                                                 <div className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
-                                                Error processing request. Please try again or email info@navagathatech.com
+                                                {errorMessage || "Error processing request. Please try again or email info@navagathatech.com"}
                                             </div>
                                         )}
 
