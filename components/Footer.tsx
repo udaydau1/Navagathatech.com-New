@@ -26,7 +26,7 @@ export function Footer() {
                             <li><a href="/#about" className="hover:text-white transition-colors">About Us</a></li>
                             <li><a href="/#vision" className="hover:text-white transition-colors">Our Vision</a></li>
                             <li><a href="/#why-choose-us" className="hover:text-white transition-colors">Why Choose Us</a></li>
-                            <li><Link href="/careers" className="hover:text-white transition-colors font-medium text-secondary">Careers</Link></li>
+                            <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
                         </ul>
                     </div>
 

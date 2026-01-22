@@ -145,7 +145,7 @@ export default function CareersPage() {
                                     </div>
                                     <div className="flex-shrink-0">
                                         <Link
-                                            href={`/contact?subject=Application for ${job.title}`}
+                                            href={`/careers/apply?job=${encodeURIComponent(job.title)}`}
                                             className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full group-hover:bg-secondary group-hover:text-primary transition-all"
                                         >
                                             Apply Now <ArrowRight size={18} />
@@ -170,10 +170,10 @@ export default function CareersPage() {
                             We're always growing! Send your resume to <span className="text-primary font-bold">info@navagathatech.com</span> and we'll keep you in mind for future opportunities.
                         </p>
                         <Link
-                            href="/contact"
+                            href="/careers/apply"
                             className="px-10 py-5 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-all shadow-xl shadow-primary/20"
                         >
-                            Get in Touch
+                            Apply for General Vacancy
                         </Link>
                     </motion.div>
                 </div>
