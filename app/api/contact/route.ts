@@ -9,8 +9,18 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { name, email, company, subject, message } = body;
 
+        // Check if API key is present
+        const apiKey = process.env.RESEND_API_KEY;
+        if (!apiKey) {
+            console.error("DEBUG: RESEND_API_KEY is missing from environment variables.");
+            return NextResponse.json({
+                success: false,
+                message: "Server configuration error: Email service not configured."
+            }, { status: 500 });
+        }
+
         // Initialize Resend with API key at runtime
-        const resend = new Resend(process.env.RESEND_API_KEY);
+        const resend = new Resend(apiKey);
 
         // Send email using Resend
         const { data, error } = await resend.emails.send({
