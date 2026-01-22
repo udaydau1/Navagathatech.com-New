@@ -54,12 +54,12 @@ export default function CareersPage() {
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent skew-x-12 translate-x-1/2" />
                 <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
                     <motion.div {...fadeIn}>
-                        <span className="inline-block py-1 px-4 rounded-full bg-secondary/20 text-secondary border border-secondary/30 text-xs font-bold uppercase tracking-widest mb-6">
+                        <span className="inline-block py-1 px-4 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold uppercase tracking-widest mb-6">
                             Join Navagatha Tech
                         </span>
                         <h1 className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight">
                             Build the Future of <br />
-                            <span className="text-secondary">Enterprise Technology</span>
+                            <span className="text-white">Enterprise Technology</span>
                         </h1>
                         <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                             We're looking for passionate innovators, legacy experts, and bold thinkers to help us transform the global IT landscape.
