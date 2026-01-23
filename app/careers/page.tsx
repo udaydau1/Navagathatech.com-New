@@ -145,10 +145,10 @@ export default function CareersPage() {
                                     </div>
                                     <div className="flex-shrink-0">
                                         <Link
-                                            href={`/careers/apply?job=${encodeURIComponent(job.title)}`}
+                                            href={`/careers/${job.title.toLowerCase().replace(/ /g, "-")}`}
                                             className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full group-hover:bg-secondary group-hover:text-primary transition-all"
                                         >
-                                            Apply Now <ArrowRight size={18} />
+                                            View Details <ArrowRight size={18} />
                                         </Link>
                                     </div>
                                 </div>
