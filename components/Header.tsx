@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, LogOut, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const navigation = [
     { name: "Home", href: "/" },
@@ -19,6 +20,8 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userEmail, setUserEmail] = useState<string | null>(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         // Fetch session
@@ -44,6 +47,23 @@ export function Header() {
             document.body.style.overflow = 'unset';
         };
     }, [mobileMenuOpen]);
+
+    const handleLogout = async () => {
+        try {
+            const res = await fetch("/api/auth/logout", { method: "POST" });
+            if (res.ok) {
+                setUserEmail(null);
+                setDropdownOpen(false);
+                setMobileMenuOpen(false);
+                router.push("/");
+                router.refresh();
+            }
+        } catch (err) {
+            console.error("Logout failed", err);
+        }
+    };
+
+    const isAdmin = userEmail === "hr@navagathatech.com";
 
     return (
         <header
@@ -78,13 +98,56 @@ export function Header() {
                     ))}
 
                     {userEmail ? (
-                        <Link
-                            href={userEmail === "hr@navagathatech.com" ? "/admin" : "#"}
-                            className="flex items-center gap-2 text-sm font-bold text-primary px-4 py-2 bg-primary/5 border border-primary/10 rounded-full hover:bg-secondary hover:text-primary transition-all transition-colors"
-                        >
-                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                            {userEmail === "hr@navagathatech.com" ? "Admin Panel" : userEmail.split("@")[0]}
-                        </Link>
+                        <div className="relative">
+                            <button
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                className="flex items-center gap-2 text-sm font-bold text-primary px-4 py-2 bg-primary/5 border border-primary/10 rounded-full hover:bg-secondary hover:text-primary transition-all transition-colors"
+                            >
+                                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                                {isAdmin ? "Admin Panel" : userEmail.split("@")[0]}
+                            </button>
+
+                            <AnimatePresence>
+                                {dropdownOpen && (
+                                    <>
+                                        <div
+                                            className="fixed inset-0 z-10"
+                                            onClick={() => setDropdownOpen(false)}
+                                        />
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 10 }}
+                                            className="absolute right-0 mt-3 w-48 bg-white rounded-2xl shadow-xl shadow-primary/10 border border-gray-100 py-2 z-20"
+                                        >
+                                            <div className="px-4 py-3 border-b border-gray-50 mb-1">
+                                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Signed in as</p>
+                                                <p className="text-xs font-bold text-primary truncate">{userEmail}</p>
+                                            </div>
+
+                                            {isAdmin && (
+                                                <Link
+                                                    href="/admin"
+                                                    onClick={() => setDropdownOpen(false)}
+                                                    className="w-full text-left px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary/5 flex items-center gap-2 transition-colors"
+                                                >
+                                                    <Shield size={16} className="text-[#D4AF37]" />
+                                                    Admin Console
+                                                </Link>
+                                            )}
+
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left px-4 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-50 flex items-center gap-2 transition-colors"
+                                            >
+                                                <LogOut size={16} />
+                                                Sign out
+                                            </button>
+                                        </motion.div>
+                                    </>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     ) : (
                         <Link
                             href="/login"
@@ -146,14 +209,34 @@ export function Header() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 + navigation.length * 0.05 }}
                             >
-                                <Link
-                                    href={userEmail ? (userEmail === "hr@navagathatech.com" ? "/admin" : "#") : "/login"}
-                                    className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    {userEmail ? (userEmail === "hr@navagathatech.com" ? "Admin Dashboard" : userEmail.split("@")[0]) : "Employee Login"}
-                                    <ArrowRight size={24} className="text-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </Link>
+                                {userEmail ? (
+                                    <div className="space-y-2">
+                                        <Link
+                                            href={isAdmin ? "/admin" : "#"}
+                                            className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                            onClick={() => setMobileMenuOpen(false)}
+                                        >
+                                            {isAdmin ? "Admin Dashboard" : "My Account"}
+                                            <ArrowRight size={24} className="text-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </Link>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="text-3xl font-bold text-red-500 py-4 block border-b border-gray-50 w-full text-left flex items-center justify-between group"
+                                        >
+                                            Sign out
+                                            <LogOut size={24} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <Link
+                                        href="/login"
+                                        className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        Employee Login
+                                        <ArrowRight size={24} className="text-[#D4AF37] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </Link>
+                                )}
                             </motion.div>
                         </div>
 
