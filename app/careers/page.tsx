@@ -20,7 +20,22 @@ const values = [
 ];
 
 export default async function CareersPage() {
-    const jobs = await getJobs();
+    let jobs = [];
+    try {
+        jobs = await getJobs();
+    } catch (error) {
+        console.error("Error loading jobs:", error);
+        return (
+            <div className="min-h-screen bg-background font-sans">
+                <Header />
+                <section className="pt-40 text-center px-6">
+                    <h1 className="text-3xl font-bold text-primary mb-4">Service Temporarily Unavailable</h1>
+                    <p className="text-foreground-muted">We're experiencing some technical difficulties. Please try again later.</p>
+                </section>
+                <Footer />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-background font-sans">

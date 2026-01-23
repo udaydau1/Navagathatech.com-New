@@ -18,8 +18,15 @@ const navigation = [
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState<string | null>(null);
 
     useEffect(() => {
+        // Fetch session
+        fetch("/api/auth/session")
+            .then(res => res.json())
+            .then(data => setUserEmail(data.email))
+            .catch(() => { });
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
         };
@@ -69,6 +76,24 @@ export function Header() {
                             {item.name}
                         </Link>
                     ))}
+
+                    {userEmail ? (
+                        <Link
+                            href={userEmail === "hr@navagathatech.com" ? "/admin" : "#"}
+                            className="flex items-center gap-2 text-sm font-bold text-primary px-4 py-2 bg-primary/5 border border-primary/10 rounded-full hover:bg-secondary hover:text-primary transition-all transition-colors"
+                        >
+                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                            {userEmail === "hr@navagathatech.com" ? "Admin Panel" : userEmail.split("@")[0]}
+                        </Link>
+                    ) : (
+                        <Link
+                            href="/login"
+                            className="text-sm font-bold text-primary/60 hover:text-primary transition-all px-3 py-1.5 rounded-lg hover:bg-primary/5"
+                        >
+                            Login
+                        </Link>
+                    )}
+
                     <Link
                         href="/contact"
                         className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-95"
