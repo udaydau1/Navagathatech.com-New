@@ -4,32 +4,32 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
-    try {
-        const formData = await req.formData();
+  try {
+    const formData = await req.formData();
 
-        const name = formData.get("name") as string;
-        const email = formData.get("email") as string;
-        const phone = formData.get("phone") as string;
-        const experience = formData.get("experience") as string;
-        const message = formData.get("message") as string;
-        const jobTitle = formData.get("jobTitle") as string;
-        const resume = formData.get("resume") as File;
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const experience = formData.get("experience") as string;
+    const message = formData.get("message") as string;
+    const jobTitle = formData.get("jobTitle") as string;
+    const resume = formData.get("resume") as File;
 
-        if (!resume) {
-            return NextResponse.json({ success: false, message: "Resume is required" }, { status: 400 });
-        }
+    if (!resume) {
+      return NextResponse.json({ success: false, message: "Resume is required" }, { status: 400 });
+    }
 
-        // Convert File to ArrayBuffer for Resend
-        const arrayBuffer = await resume.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
+    // Convert File to ArrayBuffer for Resend
+    const arrayBuffer = await resume.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-        // Send email to HR
-        const { error: hrError } = await resend.emails.send({
-            from: "Navagatha Careers <contact@navagathatech.com>",
-            to: ["info@navagathatech.com"],
-            subject: `New Job Application: ${jobTitle} - ${name}`,
-            replyTo: email,
-            html: `
+    // Send email to HR
+    const { error: hrError } = await resend.emails.send({
+      from: "Navagatha Careers <contact@navagathatech.com>",
+      to: ["hr@navagathatech.com"],
+      subject: `New Job Application: ${jobTitle} - ${name}`,
+      replyTo: email,
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
           <h2 style="color: #0F172A;">New Candidate Application</h2>
           <hr />
@@ -46,25 +46,25 @@ export async function POST(req: Request) {
           <p style="font-size: 12px; color: #64748B;">This application was submitted via navagathatech.com/careers</p>
         </div>
       `,
-            attachments: [
-                {
-                    filename: resume.name,
-                    content: buffer,
-                },
-            ],
-        });
+      attachments: [
+        {
+          filename: resume.name,
+          content: buffer,
+        },
+      ],
+    });
 
-        if (hrError) {
-            console.error("HR Email Error:", hrError);
-            return NextResponse.json({ success: false, message: "Failed to notify HR" }, { status: 500 });
-        }
+    if (hrError) {
+      console.error("HR Email Error:", hrError);
+      return NextResponse.json({ success: false, message: "Failed to notify HR" }, { status: 500 });
+    }
 
-        // Send confirmation email to Applicant
-        const { error: applicantError } = await resend.emails.send({
-            from: "Navagatha Tech <contact@navagathatech.com>",
-            to: [email],
-            subject: `Application Received: ${jobTitle} at Navagatha Tech`,
-            html: `
+    // Send confirmation email to Applicant
+    const { error: applicantError } = await resend.emails.send({
+      from: "Navagatha Tech <no_reply@navagathatech.com>",
+      to: [email],
+      subject: `Application Received: ${jobTitle} at Navagatha Tech`,
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0F172A;">Hello ${name},</h2>
           <p>Thank you for your interest in the <strong>${jobTitle}</strong> position at Navagatha Tech Pvt. Ltd.</p>
@@ -80,19 +80,20 @@ export async function POST(req: Request) {
           <p><strong>Team Navagatha</strong><br />Navagatha Tech Pvt. Ltd.</p>
           <hr style="border: none; border-top: 1px solid #EEE; margin: 30px 0;" />
           <p style="font-size: 11px; color: #999; text-align: center;">
+            This is an auto-generated email. Please do not reply.<br />
             Andheri (W), Mumbai, India | <a href="https://www.navagathatech.com">navagathatech.com</a>
           </p>
         </div>
       `,
-        });
+    });
 
-        if (applicantError) {
-            console.error("Applicant Email Error:", applicantError);
-        }
-
-        return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error("API Error:", error);
-        return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
+    if (applicantError) {
+      console.error("Applicant Email Error:", applicantError);
     }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("API Error:", error);
+    return NextResponse.json({ success: false, message: "Internal server error" }, { status: 500 });
+  }
 }
