@@ -140,6 +140,21 @@ export function Header() {
                                     </Link>
                                 </motion.div>
                             ))}
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1 + navigation.length * 0.05 }}
+                            >
+                                <Link
+                                    href={userEmail ? (userEmail === "hr@navagathatech.com" ? "/admin" : "#") : "/login"}
+                                    className="text-3xl font-bold text-secondary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {userEmail ? (userEmail === "hr@navagathatech.com" ? "Admin Dashboard" : userEmail.split("@")[0]) : "Employee Login"}
+                                    <ArrowRight size={24} className="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </Link>
+                            </motion.div>
                         </div>
 
                         <motion.div
