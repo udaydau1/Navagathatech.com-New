@@ -1,0 +1,92 @@
+[
+    {
+        "id": "1",
+        "slug": "senior-software-engineer",
+        "title": "Senior Software Engineer",
+        "department": "Engineering",
+        "location": "Mumbai, IN / Remote",
+        "type": "Full-time",
+        "description": "Build next-generation enterprise applications using Next.js, TypeScript, and Microservices.",
+        "overview": "We are looking for a Senior Software Engineer to lead the development of our next-generation enterprise applications. You will work with a team of high-performing engineers to build scalable, reliable, and secure systems.",
+        "responsibilities": [
+            "Design and develop complex web applications using Next.js and TypeScript.",
+            "Architect scalable microservices and manage cloud infrastructure.",
+            "Mentor junior engineers and conduct rigorous code reviews.",
+            "Collaborate with product managers to define technical roadmaps.",
+            "Optimize application performance for maximum speed and scalability."
+        ],
+        "requirements": [
+            "5+ years of experience in full-stack development.",
+            "Expertise in React, Next.js, and Node.js.",
+            "Strong understanding of AWS/Azure cloud services.",
+            "Experience with PostgreSQL/MongoDB and Redis.",
+            "Excellent problem-solving and communication skills."
+        ],
+        "benefits": [
+            "Competitive Salary & Annual Bonus",
+            "Flexible Remote Work Options",
+            "Health & Wellness Insurance",
+            "Personalized Learning & Development Budget",
+            "Lean & Agile Work Culture"
+        ]
+    },
+    {
+        "id": "2",
+        "slug": "sap-consultant-abap",
+        "title": "SAP Consultant (ABAP)",
+        "department": "Enterprise Systems",
+        "location": "Mumbai, IN",
+        "type": "Full-time",
+        "description": "Design and implement custom SAP S/4HANA solutions for global clients.",
+        "overview": "Join our Enterprise Systems team as an SAP ABAP Consultant. You will play a key role in designing and implementing custom S/4HANA solutions for our global clients.",
+        "responsibilities": [
+            "Develop and maintain custom ABAP programs (Reports, Interfaces, Enhancements).",
+            "Perform technical analysis and design based on functional requirements.",
+            "Troubleshoot complex issues in S/4HANA environments.",
+            "Integrate SAP systems with third-party applications.",
+            "Support system upgrades and performance tuning."
+        ],
+        "requirements": [
+            "4+ years of hands-on ABAP development experience.",
+            "In-depth knowledge of SAP S/4HANA architecture.",
+            "Proficient in OData, CDS Views, and BAdIs.",
+            "Experience with SAP Fiori/UI5 is a major plus.",
+            "Strong analytical and documentation skills."
+        ],
+        "benefits": [
+            "Global Project Exposure",
+            "S/4HANA Certification Support",
+            "Collaborative Team Environment",
+            "Competitive Benefits Package"
+        ]
+    },
+    {
+        "id": "3",
+        "slug": "it-support-analyst",
+        "title": "IT Support Analyst",
+        "department": "Managed Services",
+        "location": "Mumbai, IN",
+        "type": "Contract",
+        "description": "Provide mission-critical support for legacy and modern infrastructure landscapes.",
+        "overview": "We seek a proactive IT Support Analyst to provide mission-critical support for our diverse infrastructure landscape. You will ensure high availability and performance of client systems.",
+        "responsibilities": [
+            "Monitor and maintain server health and network connectivity.",
+            "Provide level 2/3 technical support for infrastructure issues.",
+            "Automate routine maintenance tasks using scripting (PowerShell/Bash).",
+            "Manage incident tickets and documentation.",
+            "Assist in system migrations and patch management."
+        ],
+        "requirements": [
+            "3+ years in IT infrastructure or managed services.",
+            "Proficiency in Windows Server and Linux environments.",
+            "Solid understanding of networking protocols (TCP/IP, DNS).",
+            "Experience with ITSM tools like ServiceNow or Jira.",
+            "Ability to work in rotational shifts if required."
+        ],
+        "benefits": [
+            "Technical Skill Diversification",
+            "Strategic Role in Client Operations",
+            "Performance-based Incentives"
+        ]
+    }
+]
