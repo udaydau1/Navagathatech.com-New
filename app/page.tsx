@@ -1,443 +1,291 @@
-"use client";
-
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { CheckCircle2, Database, Layers, MonitorSmartphone, Server, ShieldCheck, Zap, Globe, Cpu, Cloud, Code2, type LucideIcon } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { getServiceSchema, getFAQPageSchema } from "@/lib/schema";
+import { getCaseStudies } from "@/lib/case-studies";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, BookOpen, CheckCircle2, Cloud, Code2, Cpu, Database, Globe, Layers, MonitorSmartphone, Server, ShieldCheck, Zap } from "lucide-react";
+import { CapabilitiesSection } from "@/components/CapabilitiesSection";
+import { ClientMotionWrapper } from "@/components/ClientMotionWrapper";
 
-const fadeIn = {
+const faqs = [
+  {
+    question: "What services does Navagatha Tech provide?",
+    answer: "Navagatha Tech offers a comprehensive range of IT services including Web & Mobile Development, AI & Machine Learning, Data Analytics, SAP Implementation, Legacy Modernization (AS400/Mainframe), and Cloud DevOps."
+  },
+  {
+    question: "Do you specialize in legacy system modernization?",
+    answer: "Yes, we have deep expertise in modernizing legacy systems like AS400 and Mainframe, bridging the gap between legacy reliability and modern tech stacks."
+  },
+  {
+    question: "Where is Navagatha Tech located?",
+    answer: "Our registered office is located in Andheri (West), Mumbai, India, but we serve clients globally."
+  },
+  {
+    question: "What is your approach to digital transformation?",
+    answer: "We take a holistic approach, aligning technology innovation with business goals to ensure scalability, security, and operational excellence."
+  }
+];
+
+const fadeInProps = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  viewport: { once: true },
   transition: { duration: 0.8 }
 };
 
-type ServiceCardColor = "primary" | "secondary" | "accent";
+export default async function Home() {
+  const studies = await getCaseStudies();
+  const featuredStudies = studies.slice(0, 3);
 
-type ServiceCardProps = {
-  icon: LucideIcon;
-  title: string;
-  desc: string;
-  color: ServiceCardColor;
-  points: string[];
-};
-
-const colorMap: Record<ServiceCardColor, string> = {
-  primary: "border-primary text-primary bg-primary/5",
-  secondary: "border-secondary text-secondary bg-secondary/5",
-  accent: "border-accent text-accent bg-accent/5",
-};
-
-const ServiceCard = ({ icon: Icon, title, desc, color, points }: ServiceCardProps) => {
-  return (
-    <motion.div
-      whileHover={{ y: -10, scale: 1.02 }}
-      className={`bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all border-b-8 ${colorMap[color].split(' ')[0]}`}
-    >
-      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${colorMap[color].split(' ').slice(1).join(' ')}`}>
-        <Icon size={30} />
-      </div>
-      <h3 className="text-2xl font-bold text-primary mb-4">{title}</h3>
-      <p className="text-foreground-muted mb-6 leading-relaxed">
-        {desc}
-      </p>
-      <ul className="space-y-2">
-        {points.map((point: string, idx: number) => (
-          <li key={idx} className="flex items-center gap-2 text-sm font-medium text-primary/80">
-            <CheckCircle2 size={14} className="text-secondary" />
-            {point}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
-  );
-};
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState('software');
+  // Generate schemas for services
+  const services = [
+    { name: "Web & Mobile Development", category: "Software Development", description: "End-to-end development of scalable web and mobile applications." },
+    { name: "AI & Machine Learning", category: "Artificial Intelligence", description: "Leveraging AI to automate workflows and deliver intelligent experiences." },
+    { name: "Data & Analytics", category: "Data Science", description: "Comprehensive data strategy from warehousing to visualization." },
+    { name: "Legacy Modernization", category: "Digital Transformation", description: "Modernizing AS400, Mainframe, and older software landscapes." }
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-secondary selection:text-primary">
+      {/* Service Schemas */}
+      {services.map((s, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getServiceSchema(s)) }}
+        />
+      ))}
+
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getFAQPageSchema(faqs)) }}
+      />
+
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-white text-primary">
-        {/* Abstract subtle background for light mode */}
-        <div className="absolute inset-0 z-0 opacity-5">
-          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-accent blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-secondary blur-[100px]" />
-        </div>
+      <section className="relative pt-48 pb-32 overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 -skew-x-12 translate-x-1/4 z-0" />
+        <div className="absolute top-40 left-10 w-64 h-64 bg-secondary/10 rounded-full blur-[100px] z-0" />
 
-        <div className="container relative z-10 px-6 pt-32 text-center max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block py-1 px-4 rounded-full bg-primary/5 text-primary border border-primary/10 text-sm font-bold tracking-wider mb-8">
-              NEXT-GENERATION IT SERVICES
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
-              Empowering Businesses Through <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
-                Technology Innovation
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl">
+            <ClientMotionWrapper {...fadeInProps}>
+              <span className="inline-block py-1 px-4 rounded-full bg-secondary/10 text-primary border border-secondary/20 text-xs font-bold uppercase tracking-widest mb-8">
+                Next-Gen IT Transformation
               </span>
-            </h1>
-            <p className="text-lg md:text-xl text-foreground-muted mb-12 max-w-3xl mx-auto leading-relaxed">
-              We are your strategic partner in building a future-ready application landscape.
-              Modernize, optimize, and innovate with Navagatha Tech.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/contact" className="px-10 py-5 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:-translate-y-1">
-                Start Transformation
-              </Link>
-              <a href="#capabilities" className="px-10 py-5 bg-white border-2 border-primary/10 text-primary font-bold rounded-full hover:bg-primary/5 transition-all hover:-translate-y-1">
-                Explore Capabilities
-              </a>
-            </div>
-          </motion.div>
+              <h1 className="text-5xl md:text-8xl font-extrabold text-primary mb-8 leading-tight tracking-tight">
+                Empowering <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Innovation</span> Through <br />
+                Reliable Technology
+              </h1>
+              <p className="text-xl md:text-2xl text-foreground-muted mb-12 max-w-2xl leading-relaxed">
+                Navagatha Tech is your strategic partner for digital transformation, bridging legacy reliability with modern technology excellence.
+              </p>
+              <div className="flex flex-wrap gap-6">
+                <Link
+                  href="/contact"
+                  className="px-10 py-5 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+                >
+                  Start Your Transformation <ArrowRight size={20} />
+                </Link>
+                <Link
+                  href="/#about"
+                  className="px-10 py-5 bg-white text-primary border border-primary/10 font-bold rounded-full hover:border-primary/30 transition-all hover:bg-gray-50 flex items-center gap-2"
+                >
+                  Discover Navagatha
+                </Link>
+              </div>
+            </ClientMotionWrapper>
+          </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-background">
+      <section id="about" className="py-24 bg-white relative">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              {...fadeIn}
-              className="relative"
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ClientMotionWrapper
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
               <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100 relative shadow-2xl group">
                 <Image
                   src="/images/about.png"
-                  alt="Navagatha Team Collaboration"
+                  alt="Navagatha Tech Team collaborating on IT transformation and application modernization"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
                 />
-                {/* Decorative element */}
                 <div className="absolute -bottom-6 -right-6 w-3/4 h-3/4 border-2 border-secondary/30 rounded-2xl z-[-1]" />
               </div>
-            </motion.div>
+            </ClientMotionWrapper>
 
-            <motion.div {...fadeIn}>
-              <h2 className="text-secondary font-bold tracking-widest uppercase mb-2">About Us</h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Strategic Partner for Future-Ready Landscapes</h3>
-              <div className="space-y-6 text-foreground-muted leading-relaxed">
-                <p>
-                  Navagatha Tech Pvt. Ltd. is a next-generation IT services company driven by a single purpose: to empower businesses through technology innovation and reliable delivery. We are not just another IT vendor; we want to be a strategic partner in building a future-ready application landscape.
-                </p>
-                <p>
-                  Our expertise spans Application Development & Implementation, Maintenance & Support, and Full IT Transformation, enabling organizations to modernize legacy systems, adopt cutting-edge technologies, and achieve operational excellence.
-                </p>
-                <p>
-                  We combine deep technical knowledge with a customer-first approach, ensuring every solution we deliver is secure, scalable, and aligned with our client business goals.
-                </p>
+            <ClientMotionWrapper
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-secondary font-bold tracking-widest uppercase mb-4">Strategic Partnership</h2>
+              <h3 className="text-3xl md:text-5xl font-bold text-primary mb-8 leading-tight">
+                Next-Generation IT Services Driven by <span className="text-secondary">Execution Excellence</span>
+              </h3>
+              <p className="text-lg text-foreground-muted mb-8 leading-relaxed">
+                At Navagatha Tech, we don't just provide services; we build long-term partnerships. Our philosophy centers on technology innovation paired with reliable delivery.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                    <CheckCircle2 size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Modern Innovation</h4>
+                    <p className="text-foreground-muted">Leveraging AI, Cloud, and Next-gen tech stacks for business growth.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                    <CheckCircle2 size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Reliable Delivery</h4>
+                    <p className="text-foreground-muted">Consistent, high-quality execution with global delivery standards.</p>
+                  </div>
+                </div>
               </div>
-            </motion.div>
+            </ClientMotionWrapper>
           </div>
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section id="vision" className="py-20 bg-primary text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <motion.div {...fadeIn}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Vision</h2>
-            <p className="text-xl md:text-2xl leading-relaxed font-light text-gray-200">
-              &quot;To become the most trusted partner for businesses seeking innovation, reliability, and transformation by delivering solutions that not only solve today&rsquo;s challenges but prepare organizations for tomorrow&rsquo;s opportunities.&quot;
-            </p>
-            <div className="mt-8 w-24 h-1 bg-gradient-to-r from-secondary to-accent mx-auto rounded-full" />
-          </motion.div>
-        </div>
-      </section>
+      {/* Capabilities Section - Refactored to Client Component */}
+      <CapabilitiesSection />
 
-      {/* Capabilities Section - Dynamic Tabs */}
-      <section id="capabilities" className="py-24 bg-background-alt overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-primary text-3xl md:text-5xl font-extrabold mb-6">Our Services & Capabilities</h2>
-            <p className="text-foreground-muted max-w-3xl mx-auto text-lg leading-relaxed">
-              Offering comprehensive IT-software services across all platforms. We bridge the gap between
-              cutting-edge innovation and mission-critical legacy stability.
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            {/* Tab Navigation */}
-            <div className="flex flex-wrap justify-center gap-2 mb-12 p-1.5 bg-gray-100 rounded-2xl w-full max-w-4xl mx-auto shadow-inner">
-              {[
-                { id: 'software', label: 'Software Services', icon: MonitorSmartphone },
-                { id: 'modern', label: 'Modern Tech Stack', icon: Zap },
-                { id: 'infra', label: 'Infra & DevOps', icon: Server },
-                { id: 'enterprise', label: 'Enterprise Systems', icon: Layers },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all duration-300 text-sm md:text-base ${activeTab === tab.id
-                    ? 'bg-primary text-white shadow-xl scale-105'
-                    : 'text-foreground-muted hover:bg-white hover:text-primary'
-                    }`}
-                >
-                  <tab.icon size={18} />
-                  {tab.label}
-                </button>
-              ))}
+      {/* Expertise Stats Section */}
+      <section id="expertise" className="py-24 bg-primary text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 translate-x-1/2" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-4 gap-12 text-center">
+            <div className="space-y-4">
+              <h4 className="text-5xl font-extrabold text-secondary">20+</h4>
+              <p className="text-sm font-bold uppercase tracking-widest opacity-60">Tech Stacks Covered</p>
             </div>
+            <div className="space-y-4">
+              <h4 className="text-5xl font-extrabold text-secondary">15+</h4>
+              <p className="text-sm font-bold uppercase tracking-widest opacity-60">Enterprises Served</p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-5xl font-extrabold text-secondary">99%</h4>
+              <p className="text-sm font-bold uppercase tracking-widest opacity-60">Delivery Reliability</p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-5xl font-extrabold text-secondary">24/7</h4>
+              <p className="text-sm font-bold uppercase tracking-widest opacity-60">Global Support</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Tab Content */}
-            <div className="w-full">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      {/* Featured Case Studies Section */}
+      <section id="featured-case-studies" className="py-24 bg-background-alt overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-secondary font-bold tracking-widest uppercase mb-2">Our Impact</h2>
+              <h3 className="text-3xl md:text-5xl font-bold text-primary mb-6">Success Stories</h3>
+              <p className="text-lg text-foreground-muted leading-relaxed">
+                See how we've empowered businesses across the globe with innovative IT solutions and strategic transformations.
+              </p>
+            </div>
+            <Link
+              href="/case-studies"
+              className="px-8 py-4 bg-white border border-border text-primary font-bold rounded-full hover:border-secondary hover:text-secondary transition-all flex items-center gap-2 group shadow-sm hover:shadow-md"
+            >
+              View All Case Studies <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredStudies.map((study) => (
+              <ClientMotionWrapper
+                key={study.id}
+                {...fadeInProps}
+                className="bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all border border-gray-100 group flex flex-col h-full"
               >
-                {activeTab === 'software' && (
-                  <>
-                    <ServiceCard
-                      icon={MonitorSmartphone}
-                      title="Web & Mobile Development"
-                      color="accent"
-                      desc="End-to-end development of scalable server-side and client-side web applications. Cross-platform mobile development for iOS and Android reaching global audiences."
-                      points={["Progressive Web Apps", "React/Angular/Next.js", "Flutter/React Native"]}
-                    />
-                    <ServiceCard
-                      icon={Zap}
-                      title="AI & Machine Learning"
-                      color="secondary"
-                      desc="Leveraging artificial intelligence to automate complex workflows, predict trends, and deliver intelligent user experiences tailored to your data."
-                      points={["Predictive Analytics", "NLP & Chatbots", "Custom ML Models"]}
-                    />
-                    <ServiceCard
-                      icon={Database}
-                      title="Data & Analytics"
-                      color="primary"
-                      desc="Comprehensive data strategy, from warehousing to visualization. Expert management of SQL and NoSQL ecosystems for actionable business insights."
-                      points={["Informatica ETL", "Real-time BI", "Database Tuning"]}
-                    />
-                  </>
-                )}
-
-                {activeTab === 'modern' && (
-                  <>
-                    <ServiceCard
-                      icon={Layers}
-                      title="Microservices Architecture"
-                      color="accent"
-                      desc="Decoupling monolithic legacy systems into robust, scalable microservices using modern API-first design principles and high-performance protocols."
-                      points={["Event-Driven Design", "API Gateways", "Service Mesh"]}
-                    />
-                    <ServiceCard
-                      icon={CheckCircle2}
-                      title="Test Automation"
-                      color="secondary"
-                      desc="Full-lifecycle quality assurance with automated regression, performance, and security testing integrated directly into your build pipelines."
-                      points={["CI/CD Integration", "Performance Testing", "Zero-Bug Policy"]}
-                    />
-                    <ServiceCard
-                      icon={ShieldCheck}
-                      title="Cybersecurity"
-                      color="primary"
-                      desc="Security-first approach to all software applications. Protecting your infrastructure from modern threats with proactive monitoring and encryption."
-                      points={["Vulnerability Audit", "Identity Management", "Data Encryption"]}
-                    />
-                  </>
-                )}
-
-                {activeTab === 'infra' && (
-                  <>
-                    <ServiceCard
-                      icon={Server}
-                      title="Server & Infrastructure"
-                      color="accent"
-                      desc="On-premise and cloud server management. High-availability cluster setups, load balancing, and dedicated cloud-native infrastructure solutions."
-                      points={["Cloud Migration", "Hybrid Cloud", "HA Environments"]}
-                    />
-                    <ServiceCard
-                      icon={Zap}
-                      title="DevOps & GitOps"
-                      color="secondary"
-                      desc="Eliminating silos between development and operations. Infrastructure as Code (IaC) and automated deployment for rapid, reliable delivery."
-                      points={["Docker & Kubernetes", "Terraform/Ansible", "CI/CD Pipelines"]}
-                    />
-                    <ServiceCard
-                      icon={ShieldCheck}
-                      title="Monitoring & NOC"
-                      color="primary"
-                      desc="24/7 infrastructure monitoring and incident response. Ensuring 99.9% uptime for your mission-critical server applications and network."
-                      points={["Proactive Alerts", "Log Aggregation", "Disaster Recovery"]}
-                    />
-                  </>
-                )}
-
-                {activeTab === 'enterprise' && (
-                  <>
-                    <ServiceCard
-                      icon={Layers}
-                      title="SAP Implementation"
-                      color="accent"
-                      desc="Expert SAP S/4HANA migration, consulting, and custom ABAP development. Streamlining enterprise resource planning for maximum efficiency."
-                      points={["S/4HANA Migration", "Custom Modules", "ERP Integration"]}
-                    />
-                    <ServiceCard
-                      icon={Server}
-                      title="Legacy Modernization"
-                      color="secondary"
-                      desc="Strategic handling of AS400, Mainframe, and C/C++ applications. We bridge the gap between legacy reliability and modern requirements."
-                      points={["AS400/IBMi", "Mainframe Refactoring", "Legacy Connectors"]}
-                    />
-                    <ServiceCard
-                      icon={Zap}
-                      title="Application Transformation"
-                      color="primary"
-                      desc="Holistic IT transformation of your entire software landscape. Reducing technical debt while increasing business agility and innovation speed."
-                      points={["Code Refactoring", "System Integration", "Digital ROI"]}
-                    />
-                  </>
-                )}
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Expertise Section - Side by Side layout */}
-      <section id="expertise" className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
-              <h2 className="text-secondary font-bold tracking-widest uppercase mb-2">Expertise</h2>
-              <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Deep Technology Spectrum</h3>
-              <p className="text-foreground-muted mb-8 text-lg">
-                We bring hands-on expertise across the entire technology spectrum, bridging the gap between legacy reliability and modern innovation.
-              </p>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                {[
-                  { title: "AI & Innovation", desc: "Machine Learning, NLP, Predictive Analytics", icon: Cpu },
-                  { title: "Enterprise ERP", desc: "SAP S/4HANA, ABAP, Module Customization", icon: Layers },
-                  { title: "Cloud & DevOps", desc: "AWS/Azure, Kubernetes, CI/CD Pipelines", icon: Cloud },
-                  { title: "Legacy Systems", desc: "AS400, Mainframe, C/C++ Modernization", icon: Server },
-                  { title: "Web & Apps", desc: "Next.js, React, Mobile (iOS/Android)", icon: MonitorSmartphone },
-                  { title: "Databases", desc: "DB2, Oracle, SQL Server, MySQL", icon: Database },
-                  { title: "Infrastructure", desc: "Server Mgmt, Network, Security Audit", icon: Globe },
-                  { title: "Integrations", desc: "REST/JSON APIs, Microservices", icon: Code2 },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100"
+                <div className="mb-6">
+                  <span className="inline-block py-1 px-3 rounded-full bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-wider mb-4">
+                    {study.category}
+                  </span>
+                  <h4 className="text-xl font-bold text-primary group-hover:text-secondary transition-colors mb-4 line-clamp-2">
+                    {study.title}
+                  </h4>
+                  <p className="text-foreground-muted text-sm leading-relaxed mb-6 line-clamp-3">
+                    {study.summary}
+                  </p>
+                </div>
+                <div className="mt-auto flex items-center justify-between border-t border-gray-50 pt-6">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{study.client}</span>
+                  <Link
+                    href={`/case-studies/${study.slug}`}
+                    className="text-primary font-bold text-sm hover:text-secondary flex items-center gap-1 transition-colors"
                   >
-                    <div className="p-2.5 bg-primary/5 text-primary rounded-lg mt-1 group-hover:bg-primary group-hover:text-white transition-colors">
-                      <item.icon size={22} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-primary text-base">{item.title}</h4>
-                      <p className="text-sm text-foreground-muted">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-primary rounded-2xl p-10 text-white flex flex-col justify-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-[80px]" />
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-6">Why It Matters</h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  Our holistic approach ensures that every solution is aligned with your business goals, enabling cost efficiency and operational agility.
-                </p>
-                <p className="text-lg font-medium text-secondary">
-                  &quot;We don&apos;t just implement technology — we transform your IT ecosystem into a strategic asset.&quot;
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section id="why-choose-us" className="py-24 bg-gradient-to-b from-background-alt to-white">
-        <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12">Why Choose Us?</h2>
-
-          <div className="grid md:grid-cols-2 gap-8 text-left">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-6 bg-white rounded-xl shadow-md border border-gray-100"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="text-secondary" size={28} />
-                <h4 className="text-xl font-bold text-primary">Personalized Attention</h4>
-              </div>
-              <p className="text-foreground-muted">
-                Direct engagement with experts. We offer a lean structure that adapts quickly to your needs.
-              </p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-6 bg-white rounded-xl shadow-md border border-gray-100"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="text-secondary" size={28} />
-                <h4 className="text-xl font-bold text-primary">Cost Effective</h4>
-              </div>
-              <p className="text-foreground-muted">
-                Deliver solutions without compromising quality. We optimize for value and long-term ROI.
-              </p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-6 bg-white rounded-xl shadow-md border border-gray-100"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="text-secondary" size={28} />
-                <h4 className="text-xl font-bold text-primary">End-to-End Transformation</h4>
-              </div>
-              <p className="text-foreground-muted">
-                Combining legacy expertise with modern innovation to provide a complete IT landscape overhaul.
-              </p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-6 bg-white rounded-xl shadow-md border border-gray-100"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="text-secondary" size={28} />
-                <h4 className="text-xl font-bold text-primary">Security First</h4>
-              </div>
-              <p className="text-foreground-muted">
-                A fundamental commitment to safeguarding your data and processes during any transformation.
-              </p>
-            </motion.div>
+                    Details <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </ClientMotionWrapper>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 bg-primary text-white text-center">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
-          <p className="mb-8 text-gray-300 max-w-2xl mx-auto">
-            Partner with Navagatha Tech for reliable, innovative, and future-proof IT solutions.
-          </p>
-          <Link href="/contact" className="inline-block px-10 py-5 bg-secondary text-primary font-bold rounded-full hover:bg-white transition-all shadow-xl shadow-secondary/20 hover:-translate-y-1">
-            Contact Us Today
-          </Link>
+          <div className="bg-primary rounded-[40px] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+
+            <div className="relative z-10 max-w-3xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-bold mb-8">Ready to evolve your digital landscape?</h2>
+              <p className="text-xl opacity-80 mb-12">
+                Join forces with Navagatha Tech and transform your IT reliability and innovation potential.
+              </p>
+              <Link
+                href="/contact"
+                className="px-12 py-6 bg-secondary text-primary font-extrabold text-xl rounded-full hover:bg-white transition-all shadow-xl hover:shadow-secondary/20 inline-flex items-center gap-3"
+              >
+                Connect With Us Today <ArrowRight size={24} />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-secondary font-bold tracking-widest uppercase mb-2">Knowledge Base</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Frequently Asked Questions</h3>
+          </div>
+          <div className="max-w-4xl mx-auto grid gap-6">
+            {faqs.map((faq, idx) => (
+              <ClientMotionWrapper
+                key={idx}
+                {...fadeInProps}
+                className="p-8 rounded-2xl bg-background-alt border border-gray-100 hover:border-secondary transition-all"
+              >
+                <h4 className="text-xl font-bold text-primary mb-3">{faq.question}</h4>
+                <p className="text-foreground-muted leading-relaxed">{faq.answer}</p>
+              </ClientMotionWrapper>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google"; // Using Outfit for a modern tech look
 import "./globals.css";
+import { getOrganizationSchema, getWebSiteSchema } from "@/lib/schema";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -15,7 +16,22 @@ export const metadata: Metadata = {
     template: "%s | Navagatha Tech"
   },
   description: "Navagatha Tech is a strategic partner for IT transformation, application development, and modern innovation. We empower businesses through technology innovation and reliable delivery.",
-  keywords: ["Navagatha Tech", "IT Services", "Application Development", "Digital Transformation", "IT Consulting", "Strategic IT Partner", "Software Development India"],
+  keywords: [
+    "Navagatha Tech",
+    "IT Services India",
+    "Application Development",
+    "Digital Transformation",
+    "IT Consulting",
+    "Strategic IT Partner",
+    "Software Development India",
+    "Legacy Modernization",
+    "SAP Implementation",
+    "AS400 Modernization",
+    "Cloud Migration Services",
+    "DevOps Consulting",
+    "AI Machine Learning Services",
+    "Enterprise IT Solutions Mumbai"
+  ],
   authors: [{ name: "Navagatha Tech Team" }],
   creator: "Navagatha Tech",
   publisher: "Navagatha Tech",
@@ -34,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Navagatha Tech",
     images: [
       {
-        url: "/images/logo_navagatha.png", // Using the existing logo for social sharing
+        url: "/images/logo_navagatha.png",
         width: 1200,
         height: 630,
         alt: "Navagatha Tech Logo",
@@ -49,6 +65,7 @@ export const metadata: Metadata = {
     description: "Next-generation IT services and digital transformation partnership.",
     images: ["/images/logo_navagatha.png"],
   },
+  manifest: '/manifest.webmanifest',
   robots: {
     index: true,
     follow: true,
@@ -62,45 +79,29 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Navagatha Tech Pvt. Ltd.",
-  "url": "https://www.navagathatech.com",
-  "logo": "https://www.navagathatech.com/images/logo_navagatha.png",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+91 22 45705334",
-    "contactType": "customer service",
-    "email": "info@navagathatech.com",
-    "availableLanguage": ["en", "Hindi"]
-  },
-  "sameAs": [
-    // Add LinkedIn/Twitter URLs here if available later
-  ],
-  "description": "Next-generation IT services company driven by technology innovation and reliable delivery.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Office No. 112, A wing, 1st floor, Crystal plaza premises co - operative society ltd. New link road, Opposite infinity mall",
-    "addressLocality": "Andheri (west) Mumbai",
-    "postalCode": "400053",
-    "addressCountry": "IN"
-  }
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get enhanced schema data
+  const organizationSchema = getOrganizationSchema();
+  const websiteSchema = getWebSiteSchema();
+
   return (
     <html lang="en" className="scroll-smooth">
       <body
         className={`${outfit.variable} antialiased bg-background text-foreground`}
       >
+        {/* Organization & LocalBusiness Schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        {/* WebSite Schema with Search Action */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         {children}
       </body>

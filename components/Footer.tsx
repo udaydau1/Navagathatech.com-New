@@ -25,7 +25,7 @@ export function Footer() {
                         <ul className="space-y-3 text-sm text-gray-300">
                             <li><a href="/#about" className="hover:text-white transition-colors">About Us</a></li>
                             <li><a href="/#vision" className="hover:text-white transition-colors">Our Vision</a></li>
-                            <li><a href="/#why-choose-us" className="hover:text-white transition-colors">Why Choose Us</a></li>
+                            <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
                             <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
                         </ul>
                     </div>
@@ -33,10 +33,10 @@ export function Footer() {
                     <div className="flex flex-col gap-6">
                         <h3 className="text-lg font-semibold text-secondary">Capabilities</h3>
                         <ul className="space-y-3 text-sm text-gray-300">
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">App Development</a></li>
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">IT Transformation</a></li>
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">Maintenance & Support</a></li>
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">Database Expertise</a></li>
+                            <li><a href="/#capabilities" className="hover:text-white transition-colors">App Development</a></li>
+                            <li><a href="/#capabilities" className="hover:text-white transition-colors">IT Transformation</a></li>
+                            <li><a href="/#capabilities" className="hover:text-white transition-colors">Maintenance & Support</a></li>
+                            <li><a href="/#capabilities" className="hover:text-white transition-colors">Database Expertise</a></li>
                         </ul>
                     </div>
 

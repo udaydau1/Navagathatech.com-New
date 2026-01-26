@@ -12,7 +12,7 @@ const navigation = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/#about" },
     { name: "Capabilities", href: "/#capabilities" },
-    { name: "Expertise", href: "/#expertise" },
+    { name: "Case Studies", href: "/case-studies" },
     { name: "Careers", href: "/careers" },
 ];
 

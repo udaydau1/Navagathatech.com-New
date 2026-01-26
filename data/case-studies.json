@@ -1,0 +1,59 @@
+[
+    {
+        "id": "1",
+        "title": "AS400 Modernization for Global Logistics",
+        "slug": "as400-modernization-logistics",
+        "category": "Legacy Modernization",
+        "client": "Global Logistics Corp",
+        "summary": "Transformed a legacy AS400 system into a modern, cloud-native application landscape, improving operational efficiency by 40%.",
+        "content": "Our client, a global logistics leader, was struggling with a mission-critical but aging AS400 system. We implemented a strategic modernized roadmap, decoupling core logic into scalable microservices while maintaining the reliability of the underlying data. The result was a future-ready platform that supports real-time tracking and advanced analytics.",
+        "links": [
+            {
+                "name": "Legacy Modernization",
+                "url": "/#capabilities"
+            },
+            {
+                "name": "Cloud & DevOps",
+                "url": "/#expertise"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "title": "Next-Gen Mobile App for Retail Leader",
+        "slug": "next-gen-mobile-retail",
+        "category": "Mobile Development",
+        "client": "Retail Giants Inc",
+        "summary": "Built a high-performance cross-platform mobile application using Flutter, resulting in a 25% increase in mobile-driven sales.",
+        "content": "For this top-tier retailer, we developed a seamless mobile experience that integrates with their existing ERP. Leveraging Flutter for cross-platform efficiency and Next.js for a robust backend, we delivered a secure, scalable solution that provides personalized shopping experiences and real-time inventory management.",
+        "links": [
+            {
+                "name": "Web & Mobile Development",
+                "url": "/#capabilities"
+            },
+            {
+                "name": "AI & Innovation",
+                "url": "/#expertise"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "title": "AI-Driven Analytics for Healthcare Provider",
+        "slug": "ai-analytics-healthcare",
+        "category": "AI & Data Science",
+        "client": "HealthFirst Systems",
+        "summary": "Implemented a predictive analytics platform using Machine Learning to optimize patient flow and resource allocation.",
+        "content": "HealthFirst Systems needed a way to predict patient surges and optimize staffing. We built a custom ML solution that analyzes historical data and real-time inputs, providing actionable insights that reduced wait times by 30% and improved patient outcomes through better resource management.",
+        "links": [
+            {
+                "name": "AI & Machine Learning",
+                "url": "/#capabilities"
+            },
+            {
+                "name": "Data & Analytics",
+                "url": "/#capabilities"
+            }
+        ]
+    }
+]
