@@ -65,6 +65,17 @@ export const metadata: Metadata = {
     description: "Next-generation IT services and digital transformation partnership.",
     images: ["/images/logo_navagatha.png"],
   },
+  icons: {
+    icon: [
+      { url: "/icon.png" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/icon.png",
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   manifest: '/manifest.webmanifest',
   robots: {
     index: true,
