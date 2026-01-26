@@ -11,7 +11,7 @@ import { ClientMotionWrapper } from "@/components/ClientMotionWrapper";
 const faqs = [
   {
     question: "What services does Navagatha Tech provide?",
-    answer: "Navagatha Tech offers a comprehensive range of IT services including Web & Mobile Development, AI & Machine Learning, Data Analytics, SAP Implementation, Legacy Modernization (AS400/Mainframe), and Cloud DevOps."
+    answer: "Navagatha Tech offers a comprehensive range of IT services including Web & Mobile Development, AI & Machine Learning, Data Analytics, SAP Implementation, Legacy Modernization (AS400/Mainframe) and Cloud DevOps."
   },
   {
     question: "Do you specialize in legacy system modernization?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: "What is your approach to digital transformation?",
-    answer: "We take a holistic approach, aligning technology innovation with business goals to ensure scalability, security, and operational excellence."
+    answer: "We take a holistic approach, aligning technology innovation with business goals to ensure scalability, security and operational excellence."
   }
 ];
 
@@ -134,7 +134,7 @@ export default async function Home() {
                 Next-Generation IT Services Driven by <span className="text-secondary">Execution Excellence</span>
               </h3>
               <p className="text-lg text-foreground-muted mb-8 leading-relaxed">
-                At Navagatha Tech, we don't just provide services; we build long-term partnerships. Our philosophy centers on technology innovation paired with reliable delivery.
+                At Navagatha Tech, we don't just provide services, we build long-term partnerships. Our philosophy centers on technology innovation paired with reliable delivery.
               </p>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">

@@ -6,8 +6,8 @@
         "department": "Engineering",
         "location": "Mumbai, IN / Remote",
         "type": "Full-time",
-        "description": "Build next-generation enterprise applications using Next.js, TypeScript, and Microservices.",
-        "overview": "We are looking for a Senior Software Engineer to lead the development of our next-generation enterprise applications. You will work with a team of high-performing engineers to build scalable, reliable, and secure systems.",
+        "description": "Build next-generation enterprise applications using Next.js, TypeScript and Microservices.",
+        "overview": "We are looking for a Senior Software Engineer to lead the development of our next-generation enterprise applications. You will work with a team of high-performing engineers to build scalable, reliable and secure systems.",
         "responsibilities": [
             "Design and develop complex web applications using Next.js and TypeScript.",
             "Architect scalable microservices and manage cloud infrastructure.",

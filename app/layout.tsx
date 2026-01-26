@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: "Navagatha Tech Pvt. Ltd. | Next-Generation IT Services",
     template: "%s | Navagatha Tech"
   },
-  description: "Navagatha Tech is a strategic partner for IT transformation, application development, and modern innovation. We empower businesses through technology innovation and reliable delivery.",
+  description: "Navagatha Tech is a strategic partner for IT transformation, application development and modern innovation. We empower businesses through technology innovation and reliable delivery.",
   keywords: [
     "Navagatha Tech",
     "IT Services India",

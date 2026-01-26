@@ -35,7 +35,7 @@ export default async function CaseStudiesPage() {
                             <span className="text-secondary text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Case Studies</span>
                         </h1>
                         <p className="text-xl text-foreground-muted leading-relaxed">
-                            Discover how we've helped global enterprises modernize their legacy systems, adopt cutting-edge AI, and build future-ready application landscapes.
+                            Discover how we've helped global enterprises modernize their legacy systems, adopt cutting-edge AI and build future-ready application landscapes.
                         </p>
                     </div>
 

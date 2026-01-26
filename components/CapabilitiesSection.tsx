@@ -109,7 +109,7 @@ export function CapabilitiesSection() {
                             <ServiceCard
                                 icon={MonitorSmartphone}
                                 title="Web & Mobile Development"
-                                desc="Custom digital experiences built with performance, security, and scalability in mind."
+                                desc="Custom digital experiences built with performance, security and scalability in mind."
                                 color="primary"
                                 points={["Full-stack Next.js/React", "Cross-platform Mobile", "API Integration", "Progressive Web Apps"]}
                                 link="/case-studies/next-gen-mobile-retail"

@@ -37,7 +37,7 @@ TTL: Auto (or 3600)
 1. Log in to GoDaddy
 2. Go to **My Products** → **DNS**
 3. Click **Add** for each record
-4. Enter the Type, Name, and Value
+4. Enter the Type, Name and Value
 5. Save
 
 #### **Namecheap**
@@ -58,7 +58,7 @@ TTL: Auto (or 3600)
 7. Save
 
 #### **Other Registrars**
-Look for "DNS Management", "DNS Settings", or "Advanced DNS" in your domain control panel.
+Look for "DNS Management", "DNS Settings" or "Advanced DNS" in your domain control panel.
 
 ## Important Notes
 

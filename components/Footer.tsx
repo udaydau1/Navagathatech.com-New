@@ -16,7 +16,7 @@ export function Footer() {
                             />
                         </div>
                         <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
-                            We empower businesses through technology innovation, reliable delivery, and strategic partnership. Building future-ready landscapes.
+                            We empower businesses through technology innovation, reliable delivery and strategic partnership. Building future-ready landscapes.
                         </p>
                     </div>
 
@@ -24,7 +24,7 @@ export function Footer() {
                         <h3 className="text-lg font-semibold text-secondary">Company</h3>
                         <ul className="space-y-3 text-sm text-gray-300">
                             <li><a href="/#about" className="hover:text-white transition-colors">About Us</a></li>
-                            <li><a href="/#vision" className="hover:text-white transition-colors">Our Vision</a></li>
+                            <li><Link href="/expertise" className="hover:text-white transition-colors">Our Expertise</Link></li>
                             <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
                             <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
                         </ul>

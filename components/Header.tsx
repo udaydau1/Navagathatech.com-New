@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, LogOut, Shield } from "lucide-react";
+import { Menu, X, ArrowRight, LogOut, Shield, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,14 @@ const navigation = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/#about" },
     { name: "Capabilities", href: "/#capabilities" },
-    { name: "Case Studies", href: "/case-studies" },
+    {
+        name: "Our Expertise",
+        href: "#",
+        subItems: [
+            { name: "Expertise", href: "/expertise" },
+            { name: "Case Studies", href: "/case-studies" },
+        ]
+    },
     { name: "Careers", href: "/careers" },
 ];
 
@@ -21,6 +28,7 @@ export function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [expertiseDropdownOpen, setExpertiseDropdownOpen] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -88,13 +96,52 @@ export function Header() {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-8">
                     {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-sm font-medium text-foreground-muted hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-secondary after:transition-all hover:after:w-full"
-                        >
-                            {item.name}
-                        </Link>
+                        item.subItems ? (
+                            <div
+                                key={item.name}
+                                className="relative group"
+                                onMouseEnter={() => setExpertiseDropdownOpen(true)}
+                                onMouseLeave={() => setExpertiseDropdownOpen(false)}
+                            >
+                                <button
+                                    className="flex items-center gap-1 text-sm font-medium text-foreground-muted hover:text-primary transition-colors py-2"
+                                >
+                                    {item.name}
+                                    <ChevronDown size={14} className={cn("transition-transform", expertiseDropdownOpen && "rotate-180")} />
+                                </button>
+                                <AnimatePresence>
+                                    {expertiseDropdownOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 10 }}
+                                            className="absolute left-0 top-full pt-1 w-48 z-50"
+                                        >
+                                            <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                                                {item.subItems.map((sub) => (
+                                                    <Link
+                                                        key={sub.name}
+                                                        href={sub.href}
+                                                        className="block px-4 py-2.5 text-sm font-medium text-foreground-muted hover:text-primary hover:bg-gray-50 transition-all"
+                                                        onClick={() => setExpertiseDropdownOpen(false)}
+                                                    >
+                                                        {sub.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        ) : (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-sm font-medium text-foreground-muted hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-secondary after:transition-all hover:after:w-full"
+                            >
+                                {item.name}
+                            </Link>
+                        )
                     ))}
 
                     {userEmail ? (
@@ -193,14 +240,51 @@ export function Header() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 + idx * 0.05 }}
                                 >
-                                    <Link
-                                        href={item.href}
-                                        className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                        {item.name}
-                                        <ArrowRight size={24} className="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    </Link>
+                                    {item.subItems ? (
+                                        <div className="flex flex-col">
+                                            <div
+                                                className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                                onClick={() => setExpertiseDropdownOpen(!expertiseDropdownOpen)}
+                                            >
+                                                {item.name}
+                                                <ChevronDown size={24} className={cn("text-secondary transition-transform", expertiseDropdownOpen && "rotate-180")} />
+                                            </div>
+                                            <AnimatePresence>
+                                                {expertiseDropdownOpen && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, height: 0 }}
+                                                        animate={{ opacity: 1, height: "auto" }}
+                                                        exit={{ opacity: 0, height: 0 }}
+                                                        className="overflow-hidden bg-gray-50/50 rounded-xl"
+                                                    >
+                                                        {item.subItems.map((sub) => (
+                                                            <Link
+                                                                key={sub.name}
+                                                                href={sub.href}
+                                                                className="text-xl font-bold text-primary/80 px-4 py-4 block flex items-center justify-between group pl-8"
+                                                                onClick={() => {
+                                                                    setMobileMenuOpen(false);
+                                                                    setExpertiseDropdownOpen(false);
+                                                                }}
+                                                            >
+                                                                {sub.name}
+                                                                <ArrowRight size={18} className="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                            </Link>
+                                                        ))}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    ) : (
+                                        <Link
+                                            href={item.href}
+                                            className="text-3xl font-bold text-primary py-4 block border-b border-gray-50 flex items-center justify-between group"
+                                            onClick={() => setMobileMenuOpen(false)}
+                                        >
+                                            {item.name}
+                                            <ArrowRight size={24} className="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </Link>
+                                    )}
                                 </motion.div>
                             ))}
 

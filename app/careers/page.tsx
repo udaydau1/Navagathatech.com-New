@@ -3,7 +3,7 @@ import { getJobPostingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
     title: "Careers",
-    description: "Join Navagatha Tech and build the future of enterprise technology. Explore exciting career opportunities in IT services, software development, AI, cloud computing, and digital transformation.",
+    description: "Join Navagatha Tech and build the future of enterprise technology. Explore exciting career opportunities in IT services, software development, AI, cloud computing and digital transformation.",
     keywords: [
         "Navagatha Tech Careers",
         "IT Jobs India",
@@ -91,7 +91,7 @@ export default async function CareersPage() {
                                 <span className="text-white">Enterprise Technology</span>
                             </h1>
                             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-                                We're looking for passionate innovators, legacy experts, and bold thinkers to help us transform the global IT landscape.
+                                We're looking for passionate innovators, legacy experts and bold thinkers to help us transform the global IT landscape.
                             </p>
                         </ClientMotionWrapper>
                     </div>

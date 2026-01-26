@@ -43,7 +43,7 @@ export function getOrganizationSchema() {
         "url": baseUrl,
         "logo": `${baseUrl}/images/logo_navagatha.png`,
         "image": `${baseUrl}/images/logo_navagatha.png`,
-        "description": "Next-generation IT services company driven by technology innovation and reliable delivery. We specialize in application development, digital transformation, legacy modernization, and enterprise solutions.",
+        "description": "Next-generation IT services company driven by technology innovation and reliable delivery. We specialize in application development, digital transformation, legacy modernization and enterprise solutions.",
         "foundingDate": "2024",
         "slogan": "Empowering Businesses Through Technology Innovation",
         "contactPoint": {
@@ -116,7 +116,7 @@ export function getOrganizationSchema() {
                             "itemOffered": {
                                 "@type": "Service",
                                 "name": "Legacy Modernization",
-                                "description": "AS400, Mainframe, and legacy system transformation"
+                                "description": "AS400, Mainframe and legacy system transformation"
                             }
                         },
                         {
@@ -273,7 +273,7 @@ export function getContactPageSchema() {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact Navagatha Tech",
-        "description": "Get in touch with Navagatha Tech for IT services, digital transformation, and enterprise solutions",
+        "description": "Get in touch with Navagatha Tech for IT services, digital transformation and enterprise solutions",
         "url": `${baseUrl}/contact`,
         "mainEntity": {
             "@type": "Organization",
