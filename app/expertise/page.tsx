@@ -19,6 +19,7 @@ import {
     CheckCircle2,
     ArrowRight
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 const domains = [
@@ -56,9 +57,27 @@ const technologies = [
     { category: "Infrastructure", items: ["Docker", "Kubernetes", "AWS Lambda", "Azure Functions", "Jenkins"] }
 ];
 
-export const metadata = {
-    title: "Our Expertise | Navagatha Tech",
+export const metadata: Metadata = {
+    title: "Our Expertise",
     description: "Explore our deep expertise across software technologies, platforms and domains. From legacy AS400 to modern AI and Cloud architectures.",
+    keywords: [
+        "IT Expertise",
+        "Technology Stack",
+        "SAP Implementation",
+        "AS400 Modernization",
+        "Cloud Architecture",
+        "Enterprise Systems",
+        "Digital Transformation",
+        "Software Development"
+    ],
+    openGraph: {
+        title: "Our Expertise | Navagatha Tech",
+        description: "Deep expertise across Enterprise Systems, Digital Transformation, Software Innovation, and Cloud Infrastructure.",
+        url: "https://www.navagathatech.com/expertise",
+    },
+    alternates: {
+        canonical: "/expertise",
+    },
 };
 
 export default function ExpertisePage() {

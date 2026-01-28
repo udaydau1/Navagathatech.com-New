@@ -1,0 +1,10 @@
+# https://www.navagathatech.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths if any
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.navagathatech.com/sitemap.xml

@@ -4,7 +4,6 @@
         "title": "AS400 Modernization for Global Logistics",
         "slug": "as400-modernization-logistics",
         "category": "Legacy Modernization",
-        "client": "Global Logistics Corp",
         "summary": "Transformed a legacy AS400 system into a modern, cloud-native application landscape, improving operational efficiency by 40%.",
         "content": "Our client, a global logistics leader, was struggling with a mission-critical but aging AS400 system. We implemented a strategic modernized roadmap, decoupling core logic into scalable microservices while maintaining the reliability of the underlying data. The result was a future-ready platform that supports real-time tracking and advanced analytics throughout the entire logistics lifecycle.",
         "links": [
@@ -23,7 +22,6 @@
         "title": "Next-Gen Mobile App for Retail Leader",
         "slug": "next-gen-mobile-retail",
         "category": "Mobile Development",
-        "client": "Retail Giants Inc",
         "summary": "Built a high-performance cross-platform mobile application using Flutter, resulting in a 25% increase in mobile-driven sales.",
         "content": "For this top-tier retailer, we developed a seamless mobile experience that integrates with their existing ERP. Leveraging Flutter for cross-platform efficiency and Next.js for a robust backend, we delivered a secure, scalable solution that provides personalized shopping experiences and real-time inventory management. The application features advanced caching and offline capabilities for a smooth user journey.",
         "links": [
@@ -42,7 +40,6 @@
         "title": "AI-Driven Analytics for Healthcare Provider",
         "slug": "ai-analytics-healthcare",
         "category": "AI & Data Science",
-        "client": "HealthFirst Systems",
         "summary": "Implemented a predictive analytics platform using Machine Learning to optimize patient flow and resource allocation.",
         "content": "HealthFirst Systems needed a way to predict patient surges and optimize staffing. We built a custom ML solution that analyzes historical data and real-time inputs, providing actionable insights that reduced wait times by 30% and improved patient outcomes through better resource management. The system now handles over 10,000 daily data points with precision and reliability.",
         "links": [
@@ -61,7 +58,6 @@
         "title": "Procurement & Supply Chain Optimization",
         "slug": "procurement-supply-chain-optimization",
         "category": "Digital Transformation",
-        "client": "Industrial Manufacturing Ltd",
         "summary": "Automated procurement workflows and supplier management systems, reducing procurement cycle time by 50%.",
         "content": "Our client faced bottlenecks in their manual procurement process, leading to delays and higher operational costs. We developed a comprehensive digital procurement platform that automates requisition, supplier evaluation and purchase order management. By integrating this with their central ERP, we provided end-to-end visibility into the supply chain, enabling data-driven negotiations and reducing overall spend by 15%. This transformation included automated vendor onboarding and real-time performance tracking.",
         "links": [
@@ -80,7 +76,6 @@
         "title": "SAP S/4HANA Global Transformation",
         "slug": "sap-transformation-manufacturing",
         "category": "Enterprise Systems",
-        "client": "TechBuild Industries",
         "summary": "Full-scale migration from legacy SAP ECC to S/4HANA for a global manufacturing enterprise, unifying operations across 12 countries.",
         "content": "TechBuild Industries required a unified digital core to streamline their international operations. We led a multi-phase S/4HANA Greenfield implementation, focusing on finance, procurement and production planning modules. By leveraging SAP Fiori for a modern user experience and custom ABAP enhancements for specialized manufacturing rules, we achieved a single source of truth for the organization. The project resulted in a 20% reduction in month-end closing time and significantly improved global inventory accuracy.",
         "links": [
@@ -99,7 +94,6 @@
         "title": "Cloud-Native Transformation for Fintech",
         "slug": "cloud-native-fintech",
         "category": "Cloud & Infrastructure",
-        "client": "MoneyFlow Solutions",
         "summary": "Modernized a monolithic banking platform into a highly available microservices architecture on AWS, doubling deployment frequency.",
         "content": "MoneyFlow Solutions needed to accelerate their release cycles to stay competitive. We refactored their core monolith into a robust microservices architecture using Go and Node.js, deployed on Amazon EKS. By implementing a full CI/CD pipeline and Infrastructure as Code (Terraform), we enabled their team to deploy updates daily instead of monthly. The new architecture handles over 500 transactions per second with 99.99% uptime, while providing the scalability needed for their rapid user growth.",
         "links": [

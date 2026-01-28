@@ -56,8 +56,8 @@ export function getOrganizationSchema() {
         },
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Office No. 112, A wing, 1st floor, Crystal plaza premises co - operative society ltd. New link road, Opposite infinity mall",
-            "addressLocality": "Andheri (west) Mumbai",
+            "streetAddress": "Office No. 112, A Wing, 1st Floor, Crystal Plaza Premises Co-operative Society Ltd., New Link Road, Opposite Infinity Mall",
+            "addressLocality": "Andheri (West)",
             "addressRegion": "Maharashtra",
             "postalCode": "400053",
             "addressCountry": "IN"

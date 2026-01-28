@@ -2,10 +2,18 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { generateOTP } from "@/lib/auth";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
     try {
+        // Initialize Resend at runtime
+        const apiKey = process.env.RESEND_API_KEY;
+        if (!apiKey) {
+            return NextResponse.json({ message: "Email service not configured" }, { status: 500 });
+        }
+        const resend = new Resend(apiKey);
+
         const { email } = await req.json();
 
         if (!email || !email.endsWith("@navagathatech.com")) {

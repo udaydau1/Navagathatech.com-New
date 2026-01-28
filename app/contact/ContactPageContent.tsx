@@ -114,10 +114,15 @@ function ContactForm() {
                         </div>
                         <div className="text-gray-700 leading-relaxed text-lg">
                             <p className="font-bold text-primary mb-2">Navagatha Tech Pvt. Ltd.</p>
-                            <p>Office No. 112, A wing, 1st floor,</p>
-                            <p>Crystal plaza premises co - operative society ltd.</p>
-                            <p>New link road, Opposite infinity mall</p>
-                            <p>Andheri (west) Mumbai 400053 India.</p>
+                            <p>
+                                Office No. 112, A Wing, 1st Floor,<br />
+                                Crystal Plaza Premises<br />
+                                Co-operative Society Ltd.,<br />
+                                New Link Road,<br />
+                                Opposite Infinity Mall,<br />
+                                Andheri (West),<br />
+                                Mumbai 400053, India.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -316,7 +321,7 @@ export function ContactPageContent() {
     const contactSchema = getContactPageSchema();
 
     return (
-        <main className="pt-24 pb-20">
+        <main className="pt-24">
             {/* ContactPage Schema */}
             <script
                 type="application/ld+json"

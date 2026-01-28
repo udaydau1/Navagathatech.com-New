@@ -56,8 +56,7 @@ export default async function CaseStudiesPage() {
                                         {study.summary}
                                     </p>
                                 </div>
-                                <div className="mt-auto flex items-center justify-between">
-                                    <span className="text-xs font-medium text-gray-400">Client: {study.client}</span>
+                                <div className="mt-auto">
                                     <Link
                                         href={`/case-studies/${study.slug}`}
                                         className="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-all"

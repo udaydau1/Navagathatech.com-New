@@ -6,7 +6,7 @@ export interface CaseStudy {
     title: string;
     slug: string;
     category: string;
-    client: string;
+    client?: string;
     summary: string;
     content: string;
     links: { name: string; url: string }[];
