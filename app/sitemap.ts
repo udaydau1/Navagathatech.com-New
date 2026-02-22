@@ -46,19 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.8,
-        },
-        // Anchor sections for crawl depth
-        {
-            url: `${baseUrl}/#about`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.6,
-        },
-        {
-            url: `${baseUrl}/#capabilities`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.7,
         }
     ]
 

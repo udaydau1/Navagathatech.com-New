@@ -7,9 +7,17 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Case Studies | Navagatha Tech",
+    title: "Case Studies",
     description: "Explore our success stories and see how Navagatha Tech helps businesses transform their IT landscape through innovation and expertise.",
     keywords: ["IT Case Studies", "Software Development Success Stories", "Legacy Modernization Examples", "Digital Transformation Case Studies"],
+    alternates: {
+        canonical: "/case-studies",
+    },
+    openGraph: {
+        title: "Case Studies | Navagatha Tech",
+        description: "Explore our success stories and see how Navagatha Tech helps businesses transform their IT landscape through innovation and expertise.",
+        url: "https://www.navagathatech.com/case-studies",
+    },
 };
 
 export default async function CaseStudiesPage() {

@@ -7,6 +7,13 @@ import Image from "next/image";
 import { ArrowRight, BookOpen, CheckCircle2, Cloud, Code2, Cpu, Database, Globe, Layers, MonitorSmartphone, Server, ShieldCheck, Zap } from "lucide-react";
 import { CapabilitiesSection } from "@/components/CapabilitiesSection";
 import { ClientMotionWrapper } from "@/components/ClientMotionWrapper";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const faqs = [
   {

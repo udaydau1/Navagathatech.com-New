@@ -2,9 +2,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CheckCircle2, MapPin, Clock, Briefcase, ChevronLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { getJobBySlug } from "@/lib/jobs";
+import { getJobBySlug, getJobs } from "@/lib/jobs";
 import { ClientMotionWrapper } from "@/components/ClientMotionWrapper";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -12,7 +13,37 @@ const fadeIn = {
     transition: { duration: 0.6 }
 };
 
-export default async function JobDescriptionPage({ params }: { params: Promise<{ slug: string }> }) {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const job = await getJobBySlug(slug);
+
+    if (!job) {
+        return { title: "Job Not Found", robots: { index: false, follow: false } };
+    }
+
+    return {
+        title: `${job.title} in ${job.location}`,
+        description: job.description,
+        alternates: {
+            canonical: `/careers/${job.slug}`,
+        },
+        openGraph: {
+            title: `${job.title} | Navagatha Tech Careers`,
+            description: job.description,
+            url: `https://www.navagathatech.com/careers/${job.slug}`,
+            type: "website",
+        },
+    };
+}
+
+export async function generateStaticParams() {
+    const jobs = await getJobs();
+    return jobs.map((job) => ({ slug: job.slug }));
+}
+
+export default async function JobDescriptionPage({ params }: Props) {
     const { slug } = await params;
     const job = await getJobBySlug(slug);
 

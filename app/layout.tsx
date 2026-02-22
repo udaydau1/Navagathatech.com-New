@@ -40,9 +40,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "Navagatha Tech Pvt. Ltd. | Next-Generation IT Services",
     description: "Empowering businesses through technology innovation and reliable IT delivery.",

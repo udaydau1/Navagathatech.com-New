@@ -15,11 +15,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const slug = (await params).slug;
     const study = await getCaseStudyBySlug(slug);
 
-    if (!study) return { title: "Case Study Not Found" };
+    if (!study) return { title: "Case Study Not Found", robots: { index: false, follow: false } };
 
     return {
         title: `${study.title} | Case Study`,
         description: study.summary,
+        alternates: {
+            canonical: `/case-studies/${study.slug}`,
+        },
         openGraph: {
             title: study.title,
             description: study.summary,
