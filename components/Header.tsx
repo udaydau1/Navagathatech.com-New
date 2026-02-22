@@ -16,6 +16,7 @@ const navigation = [
         name: "Our Expertise",
         href: "#",
         subItems: [
+            { name: "Services", href: "/services" },
             { name: "Expertise", href: "/expertise" },
             { name: "Case Studies", href: "/case-studies" },
         ]

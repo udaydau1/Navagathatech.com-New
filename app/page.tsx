@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getServiceSchema, getFAQPageSchema } from "@/lib/schema";
 import { getCaseStudies } from "@/lib/case-studies";
+import { getServices } from "@/lib/services";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen, CheckCircle2, Cloud, Code2, Cpu, Database, Globe, Layers, MonitorSmartphone, Server, ShieldCheck, Zap } from "lucide-react";
@@ -43,6 +44,7 @@ const fadeInProps = {
 export default async function Home() {
   const studies = await getCaseStudies();
   const featuredStudies = studies.slice(0, 3);
+  const featuredServices = getServices().slice(0, 6);
 
   // Generate schemas for services
   const services = [
@@ -170,6 +172,42 @@ export default async function Home() {
 
       {/* Capabilities Section - Refactored to Client Component */}
       <CapabilitiesSection />
+
+      {/* Service Focus Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-14 max-w-3xl mx-auto">
+            <h2 className="text-secondary font-bold tracking-widest uppercase mb-2">Core Services</h2>
+            <h3 className="text-3xl md:text-5xl font-bold text-primary mb-6">Targeted Solutions for Complex IT Environments</h3>
+            <p className="text-lg text-foreground-muted leading-relaxed">
+              Explore our core services across AS400 modernization, SAP transformation, cloud migration, mainframe modernization and custom development.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredServices.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="bg-background-alt border border-gray-100 rounded-2xl p-6 hover:border-secondary transition-all group"
+              >
+                <h4 className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">{service.shortTitle}</h4>
+                <p className="text-sm text-foreground-muted mb-4">{service.summary}</p>
+                <span className="text-sm font-bold text-primary inline-flex items-center gap-2">
+                  Learn More <ArrowRight size={16} />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full hover:bg-primary/90 transition-all"
+            >
+              View All Services <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Expertise Stats Section */}
       <section id="expertise" className="py-24 bg-primary text-white overflow-hidden relative">

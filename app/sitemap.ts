@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getCaseStudies } from '@/lib/case-studies'
 import { getJobs } from '@/lib/jobs'
+import { getServices } from '@/lib/services'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.navagathatech.com'
@@ -9,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Fetch dynamic data
     const caseStudies = await getCaseStudies()
     const jobs = await getJobs()
+    const services = getServices()
 
     const staticRoutes: MetadataRoute.Sitemap = [
         {
@@ -46,6 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/services`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
         }
     ]
 
@@ -63,5 +71,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }))
 
-    return [...staticRoutes, ...caseStudyRoutes, ...careerRoutes]
+    const serviceRoutes: MetadataRoute.Sitemap = services.map(service => ({
+        url: `${baseUrl}/services/${service.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.8,
+    }))
+
+    return [...staticRoutes, ...caseStudyRoutes, ...careerRoutes, ...serviceRoutes]
 }
