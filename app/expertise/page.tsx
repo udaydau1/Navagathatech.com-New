@@ -65,6 +65,8 @@ export const metadata: Metadata = {
         "Technology Stack",
         "SAP Implementation",
         "AS400 Modernization",
+        "iSeries Modernization",
+        "IBM i Modernization",
         "Cloud Architecture",
         "Enterprise Systems",
         "Digital Transformation",

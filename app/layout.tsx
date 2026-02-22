@@ -27,6 +27,8 @@ export const metadata: Metadata = {
     "Legacy Modernization",
     "SAP Implementation",
     "AS400 Modernization",
+    "iSeries Modernization",
+    "IBM i Modernization",
     "Cloud Migration Services",
     "DevOps Consulting",
     "AI Machine Learning Services",

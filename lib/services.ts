@@ -25,9 +25,11 @@ export const services: ServicePage[] = [
         primaryKeywords: [
             "AS400 modernization",
             "IBM i modernization",
+            "iSeries modernization",
             "RPG modernization",
             "legacy migration",
             "AS400 cloud migration",
+            "IBM i migration services",
         ],
         industries: ["Manufacturing", "Retail", "Financial Services", "Healthcare", "Logistics"],
         outcomes: [
@@ -172,7 +174,7 @@ export const services: ServicePage[] = [
         hero: "Structured AS400 to SAP Migration for Enterprise Scale",
         summary:
             "We design and execute phased migration from AS400 workloads to SAP-aligned processes with minimum disruption and clear governance.",
-        primaryKeywords: ["AS400 to SAP migration", "IBM i to SAP", "legacy ERP migration", "SAP transition services"],
+        primaryKeywords: ["AS400 to SAP migration", "IBM i to SAP", "iSeries to SAP migration", "legacy ERP migration", "SAP transition services"],
         industries: ["Manufacturing", "Retail", "Financial Services"],
         outcomes: [
             "Clear transition path from AS400 business logic to SAP process models",
